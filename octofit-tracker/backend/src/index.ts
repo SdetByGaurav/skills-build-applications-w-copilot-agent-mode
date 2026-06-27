@@ -1,9 +1,10 @@
 import express from 'express';
 import routes from './routes';
 import { connectDatabase } from './config/database';
+import { getPort } from './config';
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = getPort();
 
 app.use(express.json());
 app.use(routes);

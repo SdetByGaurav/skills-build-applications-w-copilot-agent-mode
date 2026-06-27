@@ -1,3 +1,5 @@
+export const getPort = () => Number(process.env.PORT || 8000);
+
 export const getApiBaseUrl = () => {
   const codespaceName = process.env.CODESPACE_NAME;
 
