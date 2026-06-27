@@ -3,6 +3,11 @@ import routes from './routes';
 import { connectDatabase } from './config/database';
 import { getPort } from './config';
 
+const codespaceName = process.env.CODESPACE_NAME;
+const codespacesUrl = codespaceName
+  ? `https://${process.env.CODESPACE_NAME}-8000.app.github.dev`
+  : 'http://localhost:8000';
+
 export const app = express();
 const port = getPort();
 
@@ -10,7 +15,7 @@ app.use(express.json());
 app.use(routes);
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ status: 'ok', apiBaseUrl: codespacesUrl });
 });
 
 export const startServer = () => {
