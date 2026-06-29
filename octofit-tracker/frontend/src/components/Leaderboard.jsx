@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { buildApiEndpoint, normalizeApiResponse, codespaceName } from './api.js';
+import { normalizeApiResponse } from './api.js';
 
-const API_PATH = 'leaderboard';
-const endpoint = buildApiEndpoint(API_PATH);
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+const CODESPACE_API_BASE = `https://${codespaceName}-8000.app.github.dev/api`;
+const endpoint = codespaceName ? `${CODESPACE_API_BASE}/leaderboard` : '/api/leaderboard';
 
 function renderRecord(record) {
   return Object.entries(record).map(([key, value]) => (
