@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { normalizeApiResponse } from './api.js';
 
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-const CODESPACE_API_BASE = `https://${codespaceName}-8000.app.github.dev/api`;
-const endpoint = codespaceName ? `${CODESPACE_API_BASE}/activities` : '/api/activities';
+
+const endpoint = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/activities`
+  : '/api/activities';
 
 function renderRecord(record) {
   return Object.entries(record).map(([key, value]) => (
@@ -23,7 +25,7 @@ function Activities() {
       try {
         const response = await fetch(endpoint);
         const payload = await response.json();
-        setActivities(normalizeApiResponse(payload, API_PATH));
+        setActivities(normalizeApiResponse(payload, '/api/activities'));
       } catch (err) {
         setError(err?.message ?? 'Failed to load activities');
       } finally {

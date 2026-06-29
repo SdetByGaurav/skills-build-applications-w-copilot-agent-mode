@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { normalizeApiResponse } from './api.js';
-
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
-const CODESPACE_API_BASE = `https://${codespaceName}-8000.app.github.dev/api`;
-const endpoint = codespaceName ? `${CODESPACE_API_BASE}/users` : '/api/users';
 
+const endpoint = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/users`
+  : '/api/users';
+  
 function renderRecord(record) {
   return Object.entries(record).map(([key, value]) => (
     <li key={key} className="mb-1">
